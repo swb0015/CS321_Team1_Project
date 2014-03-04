@@ -6,6 +6,8 @@
 
 package cpe321_project;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Stephen
@@ -19,9 +21,20 @@ public class CPE321_Project {
         // TODO code application logic here
         
         Deck deck = new Deck();
+        Dealer dealer = new Dealer("This is a test.",17);
+        Hand dealerHand = dealer.getHand();
+        Card holeCard = deck.dealCard();
+        holeCard.setHoleCard(true);
+        dealerHand.addCard(holeCard);
+        dealerHand.addCard(deck.dealCard());
+        dealerHand.printHand();
+        System.out.println(dealerHand.getScore());
+        dealerHand.clearHole();
+        dealerHand.printHand();
         
-        deck.shuffleDeck();
-        deck.printDeck();
+        
+        //deck.shuffleDeck();
+        //deck.printDeck();
     }
     
 }
