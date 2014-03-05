@@ -14,13 +14,23 @@ import java.util.ArrayList;
  */
 public class Hand {
     private final ArrayList<Card> cards;
+    private int handScore;
+    private Boolean playerBust = false;
     
     public Hand(){
         cards = new ArrayList<>();
+        handScore = 0;
     }
     
     public void addCard(Card card){
         cards.add(card);
+        handScore += card.getValue();
+        if(handScore > 21 && containsAce()){
+            handScore -=10;
+        }
+        if(handScore > 21){
+            playerBust = true;
+        }
     }
     
     public void printHand()
@@ -30,12 +40,21 @@ public class Hand {
         }
     }
     
-    public int getScore(){
-        int score = 0;
-        for(Card card:cards){
-            score += card.getValue();
+    public Boolean containsAce(){
+        Boolean hasAce = false;
+        for (Card card:cards){
+            if("A".equals(card.getFace())){
+                hasAce = true;
+            }
         }
-        return score;
+        return hasAce;
+    }
+    
+    public int getScore(){
+        if(playerBust){
+            playerBusted();
+        }
+        return handScore;
     }
     
     public void clearHole(){
@@ -46,5 +65,9 @@ public class Hand {
     
     public void clearHand(){
         cards.clear();
+    }
+    
+    public void playerBusted(){
+        System.out.println("Player Busted with:");
     }
 }

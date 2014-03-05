@@ -23,14 +23,25 @@ public class CPE321_Project {
         Deck deck = new Deck();
         Dealer dealer = new Dealer("This is a test.",17);
         Hand dealerHand = dealer.getHand();
+        //create and print initial hand
         Card holeCard = deck.dealCard();
         holeCard.setHoleCard(true);
         dealerHand.addCard(holeCard);
         dealerHand.addCard(deck.dealCard());
         dealerHand.printHand();
-        System.out.println(dealerHand.getScore());
+        System.out.println(dealerHand.getScore()+"\n");
+        //player hits and prints new hand
+        System.out.println("Player hit");
+        dealerHand.addCard(deck.dealCard());
         dealerHand.clearHole();
         dealerHand.printHand();
+        System.out.println(dealerHand.getScore()+"\n");
+        //player hits and prints new hand
+        System.out.println("Player hit");
+        dealerHand.addCard(deck.dealCard());
+        dealerHand.clearHole();
+        dealerHand.printHand();
+        System.out.println(dealerHand.getScore()+"\n");
         
         
         //deck.shuffleDeck();
