@@ -23,6 +23,8 @@ public class CPE321_Project {
         Deck deck = new Deck();
         Dealer dealer = new Dealer("This is a test.",17);
         Hand dealerHand = dealer.getHand();
+        Items item = new Items("Gun", "Use this to win a game instantly", 3);
+        
         //create and print initial hand
         Card holeCard = deck.dealCard();
         holeCard.setHoleCard(true);
@@ -43,6 +45,8 @@ public class CPE321_Project {
         dealerHand.printHand();
         System.out.println(dealerHand.getScore()+"\n");
         
+        //This prints the item menu
+        item.printItem();
         
         //deck.shuffleDeck();
         //deck.printDeck();
