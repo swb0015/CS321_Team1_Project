@@ -23,11 +23,10 @@ public class CPE321_Project {
         Deck deck = new Deck();
         Dealer dealer = new Dealer("This is a test.",17);
         Hand dealerHand = dealer.getHand();
-        Items item = new Items("Gun", "Use this to win a game instantly", 3);
         
         //create and print initial hand
         Card holeCard = deck.dealCard();
-        holeCard.setHoleCard(true);
+        holeCard.setHidden(true);
         dealerHand.addCard(holeCard);
         dealerHand.addCard(deck.dealCard());
         dealerHand.printHand();
@@ -45,11 +44,21 @@ public class CPE321_Project {
         dealerHand.printHand();
         System.out.println(dealerHand.getScore()+"\n");
         
-        //This prints the item menu
-        item.printItem();
-        
-        //deck.shuffleDeck();
-        //deck.printDeck();
-    }
-    
+        // testing character and item stuff
+        GameCharacter player = new GameCharacter();
+        player.addItem(new Item_BonusCard("Hammer","Smash shit.",5));
+        player.addItem(new Item_BonusCard("Knife","Stab shit.",7));
+        player.addItem(new Item_Gun("Gun","Shoot shit.",9));
+        player.printItems();
+        GameCharacter npc1 = new GameCharacter();
+        player.useItem(1, npc1);
+        player.useItem(3, npc1);
+        player.printItems();
+        player.chargeItem(1, 3);
+        player.chargeItem(3, 4);
+        player.printItems();
+        player.chargeItem(1, 1);
+        player.chargeItem(3, -2);
+        player.printItems();
+    }  
 }

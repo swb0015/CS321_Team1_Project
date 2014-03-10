@@ -15,25 +15,25 @@ public class Card {
     private final String cardSuit;
     private final String cardFace;
     private final int cardValue;
-    private Boolean holeCard;
+    private Boolean hidden;
     
     public Card(String suit, String face, int value)
     {
         cardSuit = suit;
         cardFace = face;
         cardValue = value;
-        holeCard = false;
+        hidden = false;
     }
     
     public String getSuit()
     {
-        if (holeCard) return "";
+        if (hidden) return "";
         else return cardSuit;
     }
         
     public String getFace()
     {
-        if (holeCard) return "Hole Card";
+        if (hidden) return "Hidden";
         else return cardFace;
     }
     
@@ -42,7 +42,7 @@ public class Card {
         return cardValue;
     }
     
-    public void setHoleCard(Boolean isHole){
-        holeCard = isHole;
+    public void setHidden(Boolean isHidden){
+        hidden = isHidden;
     }
 }

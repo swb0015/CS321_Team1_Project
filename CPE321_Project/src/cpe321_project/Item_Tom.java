@@ -10,13 +10,13 @@ package cpe321_project;
  *
  * @author Tommy
  */
-public class Items {
+public class Item_Tom {
     private String name;
     private String description;
     private int recharge; //Used to keep track of item usage
     private int powerNeeded; //Amount of power you 
     
-    public Items(String n, String desc, int power) {
+    public Item_Tom(String n, String desc, int power) {
         name = n;
         description = desc;
         recharge = power;

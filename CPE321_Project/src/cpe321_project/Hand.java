@@ -59,7 +59,7 @@ public class Hand {
     
     public void clearHole(){
         for(Card card:cards){
-            card.setHoleCard(false);
+            card.setHidden(false);
         }
     }
     
