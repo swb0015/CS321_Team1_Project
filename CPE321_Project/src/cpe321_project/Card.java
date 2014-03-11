@@ -12,37 +12,36 @@ package cpe321_project;
  */
 public class Card {
     
-    private final String cardSuit;
-    private final String cardFace;
-    private final int cardValue;
-    private Boolean hidden;
+    private final String suit;
+    private final String face;
+    private final int value;
+    private boolean hidden;
     
-    public Card(String suit, String face, int value)
-    {
-        cardSuit = suit;
-        cardFace = face;
-        cardValue = value;
+    public Card(String s, String f, int v){
+        suit = s;
+        face = f;
+        value = v;
         hidden = false;
     }
     
-    public String getSuit()
-    {
-        if (hidden) return "";
-        else return cardSuit;
+    public String getSuit(){
+        return suit;
     }
         
-    public String getFace()
-    {
-        if (hidden) return "Hidden";
-        else return cardFace;
+    public String getFace(){
+        return face;
     }
     
-    public int getValue()
-    {
-        return cardValue;
+    public int getValue(){
+        return value;
     }
     
-    public void setHidden(Boolean isHidden){
+    public void printCard(){
+        if (hidden) System.out.println("Hidden");
+        else System.out.println(face+" of "+suit);
+    }
+    
+    public void setHidden(boolean isHidden){
         hidden = isHidden;
     }
 }

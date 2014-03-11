@@ -56,7 +56,7 @@ public abstract class Item {
         chargeTime = t;
     }
     
-    public void setChargeLevel(int l){ // accepts a value by which to alter the charge level: negative values decrement, positive values increment
+    public void setChargeLevel(int l){
        chargeLevel = l;
     }
     

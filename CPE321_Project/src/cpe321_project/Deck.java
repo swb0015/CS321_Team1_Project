@@ -21,19 +21,15 @@ public class Deck {
     private final String faces[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     private final int values[] = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
     
-    public Deck()
-    {
+    public Deck(){
         cards = new LinkedList<>();
         this.shuffleDeck();   
     }
     
-    public void shuffleDeck()
-    {
+    public final void shuffleDeck(){
         cards.clear();
-        for (String suit: suits)
-        {
-            for (int i = 0; i < 13; i++)
-            {
+        for (String suit: suits){
+            for (int i = 0; i < 13; i++){
                 cards.add(new Card(suit,faces[i],values[i]));
             }
         }
@@ -44,11 +40,9 @@ public class Deck {
         return cards.pop();
     }
     
-    public void printDeck()
-    {
-        for(Card card:cards)
-        {
-            System.out.println(card.getFace()+" "+card.getSuit());
+    public void printDeck(){
+        for(Card card:cards){
+            card.printCard();
         }
     }
     

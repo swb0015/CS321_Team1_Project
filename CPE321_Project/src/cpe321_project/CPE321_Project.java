@@ -5,9 +5,6 @@
  */
 
 package cpe321_project;
-
-import java.util.ArrayList;
-
 /**
  *
  * @author Stephen
@@ -21,6 +18,7 @@ public class CPE321_Project {
         // TODO code application logic here
         
         Deck deck = new Deck();
+        //deck.print();
         Dealer dealer = new Dealer("This is a test.",17);
         Hand dealerHand = dealer.getHand();
         
@@ -34,13 +32,13 @@ public class CPE321_Project {
         //player hits and prints new hand
         System.out.println("Player hit");
         dealerHand.addCard(deck.dealCard());
-        dealerHand.clearHole();
+        dealerHand.showHidden();
         dealerHand.printHand();
         System.out.println(dealerHand.getScore()+"\n");
         //player hits and prints new hand
         System.out.println("Player hit");
         dealerHand.addCard(deck.dealCard());
-        dealerHand.clearHole();
+        dealerHand.showHidden();
         dealerHand.printHand();
         System.out.println(dealerHand.getScore()+"\n");
         
@@ -53,12 +51,14 @@ public class CPE321_Project {
         GameCharacter npc1 = new GameCharacter();
         player.useItem(1, npc1);
         player.useItem(3, npc1);
+        player.useItem(99, npc1);
         player.printItems();
         player.chargeItem(1, 3);
         player.chargeItem(3, 4);
         player.printItems();
         player.chargeItem(1, 1);
         player.chargeItem(3, -2);
+        player.chargeItem(99, -2);
         player.printItems();
     }  
 }

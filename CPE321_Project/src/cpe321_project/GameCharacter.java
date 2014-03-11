@@ -17,25 +17,34 @@ public class GameCharacter {
     private final String description;
     private final String winString;
     private final String loseString;
+    private int points;
+    private final int hitLimit;
+    private int potMultiplier;
     private final ArrayList<Item> items;
-    private final ArrayList<Card> hand;
+    private final Hand hand;
     
     public GameCharacter(){
-        name = "John Default";
+        name = "Johnny Default";
         description = "Ethnically ambiguous native tribesman.";
         winString = "You suck!";
         loseString = "You cheated!";
+        points = 100;
+        hitLimit = 0;
+        potMultiplier = 2;
         items = new ArrayList<>();
-        hand = new ArrayList<>();
+        hand = new Hand();
     }
     
-    public GameCharacter(String n, String d, String w, String l){
+    public GameCharacter(String n, String d, String w, String l, int p, int h, int m){
         name = n;
         description = d;
         winString = w;
         loseString = l;
+        points = p;
+        hitLimit = h;
+        potMultiplier = m;
         items = new ArrayList<>();
-        hand = new ArrayList<>();
+        hand = new Hand();
     }
     
     public String getName(){
@@ -59,16 +68,78 @@ public class GameCharacter {
     }
     
     public void useItem(int item, GameCharacter opponent){
-        items.get(item-1).use(opponent, this);
+        try {
+            items.get(item-1).use(opponent, this);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("No such item.\n");
+        }
     }
     
-    public void chargeItem(int item, int adjust){ // accepts a value by which to adjust the charge level: negative values decrement, positive values increment
-       Item i = items.get(item-1);
-       int level = i.getChargeLevel();
-       int time = i.getChargeTime();
-       level += adjust;
-       if (level < 0) level = 0;
-       else if (level > time) level = time;
-       i.setChargeLevel(level);
+    public int itemCount(){
+        return items.size();
+    }
+    
+    public void chargeItem(int id, int adjust){ // accepts a value by which to adjust the charge level: negative values decrement, positive values increment
+        try {
+           Item item = items.get(id-1);
+           int level = item.getChargeLevel();
+           int time = item.getChargeTime();
+           level += adjust;
+           if (level < 0) level = 0;
+           else if (level > time) level = time;
+           item.setChargeLevel(level);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("No such item.\n");
+        }
+    }
+    
+    public void chargeAllItems(int adjust){
+        int level;
+        int time;
+        for (Item item: items){
+            level = item.getChargeLevel();
+            time = item.getChargeTime();
+            level += adjust;
+            if (level < 0) level = 0;
+            else if (level > time) level = time;
+            item.setChargeLevel(level);
+        }
+    }
+    
+    public void addCard(Card c){
+        hand.addCard(c);
+    }
+    
+    public int getHandScore(){
+        return hand.getScore();
+    }
+    
+    public String getWinString(){
+        return winString;
+    }
+    
+    public String getLoseString(){
+        return loseString;
+    }
+    
+    public int getPoints(){
+        return points;
+    }
+    
+    public void changePoints(int adjust){
+        points += adjust;
+        if (points < 0) points = 0;
+    }
+    
+    public int getMultiplier(){
+        return potMultiplier;
+    }
+    
+    public void setMultiplier(int m){
+        potMultiplier = m;
+    }
+    
+    public int getLimit(){
+        return hitLimit;
     }
 }
