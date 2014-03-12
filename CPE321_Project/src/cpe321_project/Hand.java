@@ -15,25 +15,25 @@ import java.util.ArrayList;
 public class Hand {
     private final ArrayList<Card> cards;
     private int score;
-    private boolean hasAce;
     
     public Hand(){
         cards = new ArrayList<>();
         score = 0;
-        hasAce = false;
     }
     
     public void addCard(Card card){
         cards.add(card);
-        if (card.getFace().equals("A")) hasAce = true; 
         score += card.getValue();
-        if(score > 21 && hasAce) score -=10;
+        if (card.getFace().equals("A") && score > 21){
+            score -= 10;
+        }
     }
     
     public void printHand(){
         for(Card card:cards){
             card.printCard();
         }
+        System.out.println();
     }
     
     public int getScore(){
@@ -48,5 +48,9 @@ public class Hand {
     
     public void clearHand(){
         cards.clear();
+    }
+    
+    public int count(){
+        return cards.size();
     }
 }

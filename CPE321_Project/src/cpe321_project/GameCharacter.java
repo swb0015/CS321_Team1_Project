@@ -24,10 +24,10 @@ public class GameCharacter {
     private final Hand hand;
     
     public GameCharacter(){
-        name = "Johnny Default";
-        description = "Ethnically ambiguous native tribesman.";
-        winString = "You suck!";
-        loseString = "You cheated!";
+        name = "";
+        description = "";
+        winString = "";
+        loseString = "";
         points = 100;
         hitLimit = 0;
         potMultiplier = 2;
@@ -35,14 +35,14 @@ public class GameCharacter {
         hand = new Hand();
     }
     
-    public GameCharacter(String n, String d, String w, String l, int p, int h, int m){
+    public GameCharacter(String n, String d, String w, String l, int h){
         name = n;
         description = d;
         winString = w;
         loseString = l;
-        points = p;
+        points = 0;
         hitLimit = h;
-        potMultiplier = m;
+        potMultiplier = 0;
         items = new ArrayList<>();
         hand = new Hand();
     }
@@ -108,6 +108,8 @@ public class GameCharacter {
     
     public void addCard(Card c){
         hand.addCard(c);
+        System.out.print("Card dealt: ");
+        c.printCard();
     }
     
     public int getHandScore(){
@@ -141,5 +143,17 @@ public class GameCharacter {
     
     public int getLimit(){
         return hitLimit;
+    }
+    
+    public int getCardCount(){
+        return hand.count();
+    }
+    
+    public void printHand(){
+        hand.printHand();
+    }
+    
+    public void showHiddenCards(){
+        hand.showHidden();
     }
 }
