@@ -14,7 +14,7 @@ public class Card {
     
     private final String suit;
     private final String face;
-    private final int value;
+    private int value;
     private boolean hidden;
     
     public Card(String s, String f, int v){
@@ -34,6 +34,10 @@ public class Card {
     
     public int getValue(){
         return value;
+    }
+    
+    public void setValue(int v){
+        value = v;
     }
     
     public void printCard(){

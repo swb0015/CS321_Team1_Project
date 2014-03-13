@@ -21,11 +21,17 @@ public class Hand {
         score = 0;
     }
     
-    public void addCard(Card card){
-        cards.add(card);
-        score += card.getValue();
-        if (card.getFace().equals("A") && score > 21){
-            score -= 10;
+    public void addCard(Card c){
+        cards.add(c);
+        calcScore();
+        while (score > 21 && hasHighAce()){
+            for (Card card: cards){
+                if (card.getValue() == 11){
+                    card.setValue(1);
+                    calcScore();
+                    break;
+                }
+            }
         }
     }
     
@@ -36,8 +42,22 @@ public class Hand {
         System.out.println();
     }
     
+    public boolean hasHighAce(){
+        for (Card card: cards){
+            if (card.getValue() == 11) return true;
+        }
+        return false;
+    }
+    
     public int getScore(){
         return score;
+    }
+    
+    public void calcScore(){
+        score = 0;
+        for (Card card: cards){
+            score += card.getValue();
+        }
     }
     
     public void showHidden(){

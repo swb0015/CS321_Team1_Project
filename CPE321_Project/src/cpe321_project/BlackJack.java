@@ -58,7 +58,6 @@ public class BlackJack {
             if (playerCardCount == 2) playerBlackJack = true;
         }
         if (!npcStay && npcScore >= npc.getLimit()){
-            System.out.println(npc.getName()+" chose to stay.\n");
             npcStay = true;
             if (npcScore == 21 && npcCardCount == 2) npcBlackJack = true;
         }        
@@ -116,12 +115,18 @@ public class BlackJack {
         System.out.println("Your hand:");
         player.printHand();
         if (roundOver()) return true;
-        else if (npcStay) return false;
+        else if (npcStay){
+            System.out.println(npc.getName()+" stands with "+npcScore+".\n");
+            return roundOver();
+        }
         else {
-            System.out.println(npc.getName()+" chose to hit.");
-            npc.addCard(deck.dealCard());
-            System.out.println(npc.getName()+"'s hand:");
-            npc.printHand();
+            do {
+                System.out.println(npc.getName()+" chose to hit.");
+                npc.addCard(deck.dealCard());
+                System.out.println(npc.getName()+"'s hand:");
+                npc.printHand();
+            } while (playerStay || !roundOver());
+            System.out.println(npc.getName()+" chose to stay.\n");
             return roundOver();
         }
     }
