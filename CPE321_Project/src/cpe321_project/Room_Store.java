@@ -12,5 +12,8 @@ package cpe321_project;
  */
 public class Room_Store extends Room{
     public Room_Store(){
+        setRoomDescription("This is the store\n");
+        setRoomLeft(this);
+        setRoomRight(this);
     }
 }

@@ -18,13 +18,15 @@ public class Floor {
     public Room firstRoom;
     public Room currentRoom;
     public Room previousRoom;
+    public Room store;
     private static final int numRooms = 10;
     
     public Floor(){
         roomArray = new ArrayList<>();
         
+        store = new Room_Store();
         firstRoom = new Room_Game(null,null);
-        firstRoom.setRoomDescription("This is the first room");
+        firstRoom.setRoomDescription("This is the first room\n");
         previousRoom = firstRoom;
         roomArray.add(firstRoom);
         
@@ -48,26 +50,41 @@ public class Floor {
     }
     
     void moveLeft(){
-        if(firstRoom == currentRoom && firstRoom == previousRoom){
-            currentRoom = firstRoom.getRoomLeft();
-            previousRoom = firstRoom;
+        if(currentRoom != store){
+            if(firstRoom == currentRoom && firstRoom == previousRoom){
+                currentRoom = firstRoom.getRoomLeft();
+                previousRoom = firstRoom;
+            }
+            else {
+                previousRoom = currentRoom;
+                currentRoom = currentRoom.getRoomLeft();
+            }
+            System.out.print(currentRoom.getRoomDescription());
         }
-        else {
-            previousRoom = currentRoom;
-            currentRoom = currentRoom.getRoomLeft();
-        }
-        System.out.print(currentRoom.getRoomDescription());
     }
     
     void moveRight(){
-        if(firstRoom == currentRoom && firstRoom == previousRoom){
-            currentRoom = firstRoom.getRoomRight();
-            previousRoom = firstRoom;
+        if(currentRoom != store){
+            if(firstRoom == currentRoom && firstRoom == previousRoom){
+                currentRoom = firstRoom.getRoomRight();
+                previousRoom = firstRoom;
+            }
+            else {
+                previousRoom = currentRoom;
+                currentRoom = currentRoom.getRoomRight();
+            }
+            System.out.print(currentRoom.getRoomDescription());
         }
-        else {
-            previousRoom = currentRoom;
-            currentRoom = currentRoom.getRoomRight();
-        }
+    }
+    
+    void goToStore(){
+        previousRoom = currentRoom;
+        currentRoom = store;
+        System.out.print(currentRoom.getRoomDescription());
+    }
+    
+    void exitStore(){
+        currentRoom = previousRoom;
         System.out.print(currentRoom.getRoomDescription());
     }
 }

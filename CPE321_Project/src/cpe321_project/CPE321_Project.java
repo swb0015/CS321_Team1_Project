@@ -39,6 +39,10 @@ public class CPE321_Project {
                 firstFloor.moveLeft();
             } else if (input.equals("right")){
                 firstFloor.moveRight();
+            } else if (input.equals("store")){
+                firstFloor.goToStore();
+            } else if (input.equals("exit")){
+                firstFloor.exitStore();
             }
         }
         
