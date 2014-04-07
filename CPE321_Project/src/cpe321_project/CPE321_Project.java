@@ -18,19 +18,27 @@ public class CPE321_Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        Floor firstFloor = new Floor();
+        System.out.print(firstFloor.roomArray);
+        
         Scanner in = new Scanner(System.in);
         String input;
         boolean gameOver = false;
         GameCharacter player = new GameCharacter();
         GameCharacter npc = new GameCharacter("Example Guy","Example description.","You are the loser!","You are the winner!",17);
         BlackJack blackjack = new BlackJack(player, npc, 20);
-        blackjack.deal();
+        blackjack.deal();        
         while (!gameOver){
             input = in.next();
             if (input.equals("hit")){
                 gameOver = blackjack.hit();
             } else if (input.equals("stay")){
                 gameOver = blackjack.stay();
+            } else if (input.equals("left")){
+                firstFloor.moveLeft();
+            } else if (input.equals("right")){
+                firstFloor.moveRight();
             }
         }
         
