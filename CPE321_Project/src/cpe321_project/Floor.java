@@ -15,10 +15,10 @@ import java.util.ArrayList;
 public class Floor {
     
     public ArrayList<Room> roomArray;
-    public Room firstRoom;
-    public Room currentRoom;
-    public Room previousRoom;
-    public Room store;
+    private final Room firstRoom;
+    private Room currentRoom;
+    private Room previousRoom;
+    private final Room store;
     private static final int numRooms = 10;
     
     public Floor(){
@@ -30,15 +30,9 @@ public class Floor {
         previousRoom = firstRoom;
         roomArray.add(firstRoom);
         
-        for (int i =1;i<=numRooms;i++){
-            if((i%4) == 0){
-                currentRoom = new Room_Item(previousRoom,null);            
-                currentRoom.setRoomDescription("This is item room " + i + "\n");
-            }
-            else {
-                currentRoom = new Room_Game(previousRoom,null);
-                currentRoom.setRoomDescription("This is game room " + i + "\n");
-            }
+        for (int i =2;i<=numRooms;i++){
+            currentRoom = new Room_Game(previousRoom,null);
+            currentRoom.setRoomDescription("This is game room " + i + "\n");
             previousRoom.setRoomRight(currentRoom);
             previousRoom = currentRoom;
             roomArray.add(currentRoom);
