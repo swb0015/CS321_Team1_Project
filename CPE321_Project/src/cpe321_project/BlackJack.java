@@ -9,99 +9,99 @@ package cpe321_project;
  * @author Breck
  */
 public class BlackJack {
+    private final GameManager manager = GameManager.getInstance();
     private final GameCharacter player;
-    private final GameCharacter npc;
+    private GameCharacter dealer;
     private int playerScore;
-    private int npcScore;
+    private int dealerScore;
     private int playerCardCount;
-    private int npcCardCount;
+    private int dealerCardCount;
     private boolean playerStay;
-    private boolean npcStay;
+    private boolean dealerStay;
     private boolean playerBlackJack;
-    private boolean npcBlackJack;
-    private final int ante;
+    private boolean dealerBlackJack;
+    private int ante;
     private final Deck deck;
     
-    public BlackJack(GameCharacter p, GameCharacter n, int a){
-        player = p;
-        npc = n;
+    public BlackJack(int gameNumber){
+        dealer = initialize(gameNumber);
+        player = manager.getPlayer();
         playerScore = 0;
-        npcScore = 0;
+        dealerScore = 0;
         playerCardCount = 0;
-        npcCardCount = 0;
+        dealerCardCount = 0;
         playerStay = false;
-        npcStay = false;
+        dealerStay = false;
         playerBlackJack = false;
-        npcBlackJack = false;
-        ante = a;
+        dealerBlackJack = false;
         deck = new Deck();
     }
     
     private boolean roundOver(){
         player.chargeAllItems(1);
         playerScore = player.getHandScore();
-        npcScore = npc.getHandScore();
+        dealerScore = dealer.getHandScore();
         
         if (playerScore > 21){
             playerLose("Bust! You lose!");
             return true;
-        } else if (npcScore > 21){
-            playerWin(npc.getName()+" busted! You win!");
+        } else if (dealerScore > 21){
+            playerWin(dealer.getName()+" busted! You win!");
             return true;
         }
         
         playerCardCount = player.getCardCount();
-        npcCardCount = npc.getCardCount();
+        dealerCardCount = dealer.getCardCount();
         
         if (playerScore == 21){
             playerStay = true;
             if (playerCardCount == 2) playerBlackJack = true;
         }
-        if (!npcStay && npcScore >= npc.getLimit()){
-            npcStay = true;
-            if (npcScore == 21 && npcCardCount == 2) npcBlackJack = true;
+        if (!dealerStay && dealerScore >= dealer.getLimit()){
+            dealerStay = true;
+            if (dealerScore == 21 && dealerCardCount == 2) dealerBlackJack = true;
         }        
         
-        if (playerBlackJack && npcBlackJack){
+        if (playerBlackJack && dealerBlackJack){
             gameTied();
             return true;
-        } else if (playerBlackJack && npcStay){
+        } else if (playerBlackJack && dealerStay){
             playerWin("You win!");
             return true;
-        } else if (npcBlackJack && playerStay){
+        } else if (dealerBlackJack && playerStay){
             playerLose("You lose!");
             return true;
-        } else if (playerStay && npcStay && playerScore == npcScore){
+        } else if (playerStay && dealerStay && playerScore == dealerScore){
             gameTied();
             return true;
-        } else if (playerStay && npcStay && playerScore > npcScore){
+        } else if (playerStay && dealerStay && playerScore > dealerScore){
             playerWin("You win!");
             return true;
-        } else if (playerStay && npcStay && playerScore < npcScore){
+        } else if (playerStay && dealerStay && playerScore < dealerScore){
             playerLose("You lose!");
             return true;
         } else return false;
     }
     
     public void playerWin(String msg){
-        npc.showHiddenCards();
+        dealer.showHiddenCards();
         System.out.println("Your hand:");
         player.printHand();
-        System.out.println(npc.getName()+"'s hand:");
-        npc.printHand();
+        System.out.println(dealer.getName()+"'s hand:");
+        dealer.printHand();
         System.out.println(msg);
-        System.out.println(npc.getName()+" says: "+npc.getLoseString()+"\n");
+        System.out.println(dealer.getName()+" says: "+dealer.getLoseString()+"\n");
         player.changePoints(ante*player.getMultiplier());
     }
     
     public void playerLose(String msg){
-        npc.showHiddenCards();
+        dealer.showHiddenCards();
         System.out.println("Your hand:");
         player.printHand();
-        System.out.println(npc.getName()+"'s hand:");
-        npc.printHand();
+        System.out.println(dealer.getName()+"'s hand:");
+        dealer.printHand();
         System.out.println(msg);
-        System.out.println(npc.getName()+" says: "+npc.getWinString()+"\n");
+        System.out.println(dealer.getName()+" says: "+dealer.getWinString()+"\n");
         player.changePoints(-ante);
     }
     
@@ -115,18 +115,18 @@ public class BlackJack {
         System.out.println("Your hand:");
         player.printHand();
         if (roundOver()) return true;
-        else if (npcStay){
-            System.out.println(npc.getName()+" stands with "+npcScore+".\n");
+        else if (dealerStay){
+            System.out.println(dealer.getName()+" stands with "+dealerScore+".\n");
             return roundOver();
         }
         else {
             do {
-                System.out.println(npc.getName()+" chose to hit.");
-                npc.addCard(deck.dealCard());
-                System.out.println(npc.getName()+"'s hand:");
-                npc.printHand();
+                System.out.println(dealer.getName()+" chose to hit.");
+                dealer.addCard(deck.dealCard());
+                System.out.println(dealer.getName()+"'s hand:");
+                dealer.printHand();
             } while (playerStay || !roundOver());
-            System.out.println(npc.getName()+" chose to stay.\n");
+            System.out.println(dealer.getName()+" chose to stay.\n");
             return roundOver();
         }
     }
@@ -137,31 +137,84 @@ public class BlackJack {
         if (roundOver()) return true;
         else {
             while (!roundOver()){
-                System.out.println(npc.getName()+" chose to hit.");
-                npc.addCard(deck.dealCard());
-                System.out.println(npc.getName()+"'s hand:");
-                npc.printHand();
+                System.out.println(dealer.getName()+" chose to hit.");
+                dealer.addCard(deck.dealCard());
+                System.out.println(dealer.getName()+"'s hand:");
+                dealer.printHand();
             }
             return true;
         }
     }
     
     public boolean deal(){
+        player.setupForGame();
+        dealer.setupForGame();
         System.out.print("Player ");
         player.addCard(deck.dealCard());
         Card holeCard = deck.dealCard();
         holeCard.setHidden(true);
-        System.out.print(npc.getName()+" ");
-        npc.addCard(holeCard);
+        System.out.print(dealer.getName()+" ");
+        dealer.addCard(holeCard);
         System.out.print("Player ");
         player.addCard(deck.dealCard());
-        System.out.print(npc.getName()+" ");
-        npc.addCard(deck.dealCard());
+        System.out.print(dealer.getName()+" ");
+        dealer.addCard(deck.dealCard());
         System.out.println("\nYour hand:");
         player.printHand();
-        System.out.println(npc.getName()+"'s hand:");
-        npc.printHand();
+        System.out.println(dealer.getName()+"'s hand:");
+        dealer.printHand();
         return false;
         //return roundOver();
+    }
+    
+    private GameCharacter initialize(int i){
+        switch(i){
+            case 1:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 2:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 3:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 4:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 5:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 6:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 7:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 8:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 9:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+            case 10:
+                dealer = new GameCharacter("Example Guy " + i,"Example description.","You are the loser!","You are the winner!",17);
+                ante = 20 * i;
+                break;
+                                                
+            default:
+                dealer = new GameCharacter("Example Guy","Example description.","You are the loser!","You are the winner!",17);
+                ante = 20;
+                break;
+        }  
+        return dealer;
     }
 }

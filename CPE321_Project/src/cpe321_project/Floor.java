@@ -25,13 +25,13 @@ public class Floor {
         roomArray = new ArrayList<>();
         
         store = new Room_Store();
-        firstRoom = new Room_Game(null,null);
+        firstRoom = new Room_Game(null,null,1);
         firstRoom.setRoomDescription("This is the first room\n");
         previousRoom = firstRoom;
         roomArray.add(firstRoom);
         
         for (int i =2;i<=numRooms;i++){
-            currentRoom = new Room_Game(previousRoom,null);
+            currentRoom = new Room_Game(previousRoom,null,i);
             currentRoom.setRoomDescription("This is game room " + i + "\n");
             previousRoom.setRoomRight(currentRoom);
             previousRoom = currentRoom;
@@ -43,7 +43,7 @@ public class Floor {
 
     }
     
-    void moveLeft(){
+    public Room moveLeft(){
         if(currentRoom != store){
             if(firstRoom == currentRoom && firstRoom == previousRoom){
                 currentRoom = firstRoom.getRoomLeft();
@@ -55,9 +55,10 @@ public class Floor {
             }
             System.out.print(currentRoom.getRoomDescription());
         }
+        return currentRoom;
     }
     
-    void moveRight(){
+    public Room moveRight(){
         if(currentRoom != store){
             if(firstRoom == currentRoom && firstRoom == previousRoom){
                 currentRoom = firstRoom.getRoomRight();
@@ -69,16 +70,27 @@ public class Floor {
             }
             System.out.print(currentRoom.getRoomDescription());
         }
+        return currentRoom;
     }
     
-    void goToStore(){
+    public Room goToStore(){
         previousRoom = currentRoom;
         currentRoom = store;
         System.out.print(currentRoom.getRoomDescription());
+        return currentRoom;
     }
     
-    void exitStore(){
+    public Room exitStore(){
         currentRoom = previousRoom;
         System.out.print(currentRoom.getRoomDescription());
+        return currentRoom;
+    }
+    
+    public Room getStore(){
+        return store;
+    }
+    
+    public Room getCurrentRoom(){
+        return currentRoom;
     }
 }

@@ -18,9 +18,8 @@ public class CPE321_Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        /*
         Floor firstFloor = new Floor();
-        System.out.print(firstFloor.roomArray);
         
         Scanner in = new Scanner(System.in);
         String input;
@@ -44,6 +43,13 @@ public class CPE321_Project {
             } else if (input.equals("exit")){
                 firstFloor.exitStore();
             }
+        }*/
+        
+        GameManager manager = GameManager.getInstance();
+        
+        manager.initializeGame();
+        while(true){
+            manager.listenForMove();
         }
         
 //        blackjack.deal();
