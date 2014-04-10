@@ -48,6 +48,7 @@ public class CPE321_Project {
         GameManager manager = GameManager.getInstance();
         
         manager.initializeGame();
+        manager.playGame();
         while(true){
             manager.listenForMove();
         }

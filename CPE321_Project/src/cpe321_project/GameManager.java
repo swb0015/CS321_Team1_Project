@@ -64,7 +64,7 @@ public class GameManager {
          return currentFloor;
      }
      
-     public Boolean playGame(){
+     public void playGame(){
          gameInProgress = true;
          
          currentGame.deal();
@@ -82,8 +82,6 @@ public class GameManager {
          }
          
          ((Room_Game)currentRoom).setGamePlayed();
-         
-         return gameInProgress;
      }
      
      public void listenForMove(){
