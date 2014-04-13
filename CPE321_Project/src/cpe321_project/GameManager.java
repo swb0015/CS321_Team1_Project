@@ -91,6 +91,7 @@ public class GameManager {
                      if(currentRoom!=currentFloor.getStore()){
                         currentRoom = currentFloor.moveLeft();
                         if(!((Room_Game)currentRoom).getGamePlayed()){
+                           setCurrentGame();
                            playGame();
                         }
                      }
@@ -99,6 +100,7 @@ public class GameManager {
                      if(currentRoom!=currentFloor.getStore()){
                         currentRoom = currentFloor.moveRight();
                         if(!((Room_Game)currentRoom).getGamePlayed()){
+                            setCurrentGame();
                             playGame();
                         }
                      }
