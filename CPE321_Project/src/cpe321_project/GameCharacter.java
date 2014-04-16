@@ -21,7 +21,7 @@ public class GameCharacter {
     private final int hitLimit;
     private int potMultiplier;
     private final ArrayList<Item> items;
-    private final Hand hand;
+    private Hand hand;
     
     public GameCharacter(){
         name = "";
@@ -32,7 +32,6 @@ public class GameCharacter {
         hitLimit = 0;
         potMultiplier = 2;
         items = new ArrayList<>();
-        hand = new Hand();
     }
     
     public GameCharacter(String n, String d, String w, String l, int h){
@@ -44,7 +43,6 @@ public class GameCharacter {
         hitLimit = h;
         potMultiplier = 0;
         items = new ArrayList<>();
-        hand = new Hand();
     }
     
     public String getName(){
@@ -155,5 +153,9 @@ public class GameCharacter {
     
     public void showHiddenCards(){
         hand.showHidden();
+    }
+    
+    public void setupForGame(){
+        hand = new Hand();
     }
 }
