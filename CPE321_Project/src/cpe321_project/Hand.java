@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Hand {
     private final ArrayList<Card> cards;
     private int score;
+    private final mainForm form = mainForm.getInstance();;
     
     public Hand(){
         cards = new ArrayList<>();
@@ -34,12 +35,14 @@ public class Hand {
             }
         }
     }
-    
+    public ArrayList<Card> getCards(){
+        return cards;
+    }
     public void printHand(){
         for(Card card:cards){
             card.printCard();
         }
-        System.out.println();
+        form.AddToStatusBar("");
     }
     
     public boolean hasHighAce(){

@@ -45,13 +45,16 @@ public class CPE321_Project {
             }
         }*/
         
-        GameManager manager = GameManager.getInstance();
+        //GameManager manager = GameManager.getInstance();
         
-        manager.initializeGame();
-        manager.playGame();
-        while(true){
-            manager.listenForMove();
-        }
+        //manager.initializeGame();
+        mainForm form = mainForm.getInstance();
+        form.setVisible(true);
+        //manager.playGame();
+
+        //while(true){
+            //manager.listenForMove();
+        //}
         
 //        blackjack.deal();
 //        blackjack.hit();

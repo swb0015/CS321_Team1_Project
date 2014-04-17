@@ -22,6 +22,7 @@ public class GameCharacter {
     private int potMultiplier;
     private final ArrayList<Item> items;
     private Hand hand;
+    private final mainForm form = mainForm.getInstance();;
     
     public GameCharacter(){
         name = "";
@@ -33,7 +34,9 @@ public class GameCharacter {
         potMultiplier = 2;
         items = new ArrayList<>();
     }
-    
+    public Hand getHand(){
+        return hand;
+    }
     public GameCharacter(String n, String d, String w, String l, int h){
         name = n;
         description = d;
@@ -55,10 +58,10 @@ public class GameCharacter {
     
     public void printItems(){
         for (Item item: items){
-            System.out.println(items.indexOf(item)+1+") "+item.getName()+": "+item.getDesc());
-            System.out.println("   Charge level: "+item.getChargeLevel()+"/"+item.getChargeTime());
+            form.AddToStatusBar(items.indexOf(item)+1+") "+item.getName()+": "+item.getDesc());
+            form.AddToStatusBar("   Charge level: "+item.getChargeLevel()+"/"+item.getChargeTime());
         }
-        System.out.println();
+        form.AddToStatusBar("");
     }
     
     public void addItem(Item item){
@@ -69,7 +72,7 @@ public class GameCharacter {
         try {
             items.get(item-1).use(opponent, this);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("No such item.\n");
+            form.AddToStatusBar("No such item.\n");
         }
     }
     
@@ -87,7 +90,7 @@ public class GameCharacter {
            else if (level > time) level = time;
            item.setChargeLevel(level);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("No such item.\n");
+            form.AddToStatusBar("No such item.\n");
         }
     }
     
@@ -106,7 +109,7 @@ public class GameCharacter {
     
     public void addCard(Card c){
         hand.addCard(c);
-        System.out.print("Card dealt: ");
+        form.AddToStatusBarNoReturn("Card dealt: ");
         c.printCard();
     }
     

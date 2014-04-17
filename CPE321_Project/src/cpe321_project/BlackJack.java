@@ -22,7 +22,7 @@ public class BlackJack {
     private boolean dealerBlackJack;
     private int ante;
     private final Deck deck;
-    
+    private final mainForm form = mainForm.getInstance();;
     public BlackJack(int gameNumber){
         dealer = initialize(gameNumber);
         player = manager.getPlayer();
@@ -36,7 +36,9 @@ public class BlackJack {
         dealerBlackJack = false;
         deck = new Deck();
     }
-    
+    public GameCharacter getDealer(){
+        return dealer;
+    }
     private boolean roundOver(){
         player.chargeAllItems(1);
         playerScore = player.getHandScore();
@@ -85,61 +87,62 @@ public class BlackJack {
     
     public void playerWin(String msg){
         dealer.showHiddenCards();
-        System.out.println("Your hand:");
+        form.AddToStatusBar("Your hand:");
         player.printHand();
-        System.out.println(dealer.getName()+"'s hand:");
+        form.AddToStatusBar(dealer.getName()+"'s hand:");
         dealer.printHand();
-        System.out.println(msg);
-        System.out.println(dealer.getName()+" says: "+dealer.getLoseString()+"\n");
+        form.AddToStatusBar(msg);
+        form.AddToStatusBar(dealer.getName()+" says: "+dealer.getLoseString()+"\n");
         player.changePoints(ante*player.getMultiplier());
     }
     
     public void playerLose(String msg){
         dealer.showHiddenCards();
-        System.out.println("Your hand:");
+        form.AddToStatusBar("Your hand:");
         player.printHand();
-        System.out.println(dealer.getName()+"'s hand:");
+        form.AddToStatusBar(dealer.getName()+"'s hand:");
         dealer.printHand();
-        System.out.println(msg);
-        System.out.println(dealer.getName()+" says: "+dealer.getWinString()+"\n");
+        form.AddToStatusBar(msg);
+        form.AddToStatusBar(dealer.getName()+" says: "+dealer.getWinString()+"\n");
         player.changePoints(-ante);
     }
     
     public void gameTied(){
-        System.out.println("It's a tie!");
+        form.AddToStatusBar("It's a tie!");
     }
     
     public boolean hit(){
-        System.out.println("You chose to hit.");
+        form.AddToStatusBar("You chose to hit.");
+        form.AddToStatusBar("You chose to hit.");
         player.addCard(deck.dealCard());
-        System.out.println("Your hand:");
+        form.AddToStatusBar("Your hand:");
         player.printHand();
         if (roundOver()) return true;
         else if (dealerStay){
-            System.out.println(dealer.getName()+" stands with "+dealerScore+".\n");
+            form.AddToStatusBar(dealer.getName()+" stands with "+dealerScore+".\n");
             return roundOver();
         }
         else {
             do {
-                System.out.println(dealer.getName()+" chose to hit.");
+                form.AddToStatusBar(dealer.getName()+" chose to hit.");
                 dealer.addCard(deck.dealCard());
-                System.out.println(dealer.getName()+"'s hand:");
+                form.AddToStatusBar(dealer.getName()+"'s hand:");
                 dealer.printHand();
             } while (playerStay || !roundOver());
-            System.out.println(dealer.getName()+" chose to stay.\n");
+            form.AddToStatusBar(dealer.getName()+" chose to stay.\n");
             return roundOver();
         }
     }
     
     public boolean stay(){
-        System.out.println("You chose to stay.\n");
+        form.AddToStatusBar("You chose to stay.\n");
         playerStay = true;
         if (roundOver()) return true;
         else {
             while (!roundOver()){
-                System.out.println(dealer.getName()+" chose to hit.");
+                form.AddToStatusBar(dealer.getName()+" chose to hit.");
                 dealer.addCard(deck.dealCard());
-                System.out.println(dealer.getName()+"'s hand:");
+                form.AddToStatusBar(dealer.getName()+"'s hand:");
                 dealer.printHand();
             }
             return true;
@@ -149,19 +152,19 @@ public class BlackJack {
     public boolean deal(){
         player.setupForGame();
         dealer.setupForGame();
-        System.out.print("Player ");
+        form.AddToStatusBarNoReturn("Player ");
         player.addCard(deck.dealCard());
         Card holeCard = deck.dealCard();
         holeCard.setHidden(true);
-        System.out.print(dealer.getName()+" ");
+        form.AddToStatusBarNoReturn(dealer.getName()+" ");
         dealer.addCard(holeCard);
-        System.out.print("Player ");
+        form.AddToStatusBarNoReturn("Player ");
         player.addCard(deck.dealCard());
-        System.out.print(dealer.getName()+" ");
+        form.AddToStatusBarNoReturn(dealer.getName()+" ");
         dealer.addCard(deck.dealCard());
-        System.out.println("\nYour hand:");
+        form.AddToStatusBar("\nYour hand:");
         player.printHand();
-        System.out.println(dealer.getName()+"'s hand:");
+        form.AddToStatusBar(dealer.getName()+"'s hand:");
         dealer.printHand();
         return false;
         //return roundOver();

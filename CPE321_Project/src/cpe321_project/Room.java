@@ -15,6 +15,7 @@ public class Room{
     private Room roomLeft;
     private Room roomRight;
     private String roomDescription;
+    private String roomPictureURL;
 
 
     public Room(){  
@@ -24,6 +25,14 @@ public class Room{
     
     public void setRoomLeft(Room room){
         roomLeft = room;
+    }
+    
+    public String getroomPictureURL(){
+        return roomPictureURL;
+    }
+    
+    public void setRoomPictureURL(String roomURL){
+        roomPictureURL = roomURL;
     }
     
     public void setRoomRight(Room room){

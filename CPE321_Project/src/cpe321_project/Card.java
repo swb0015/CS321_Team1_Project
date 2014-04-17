@@ -16,6 +16,7 @@ public class Card {
     private final String face;
     private int value;
     private boolean hidden;
+    private final mainForm form = mainForm.getInstance();;
     
     public Card(String s, String f, int v){
         suit = s;
@@ -39,10 +40,12 @@ public class Card {
     public void setValue(int v){
         value = v;
     }
-    
+    public boolean getHidden(){
+        return hidden;
+    }
     public void printCard(){
-        if (hidden) System.out.println("Hidden");
-        else System.out.println(face+" of "+suit);
+        if (hidden) form.AddToStatusBar("Hidden");
+        else form.AddToStatusBar(face+" of "+suit);
     }
     
     public void setHidden(boolean isHidden){

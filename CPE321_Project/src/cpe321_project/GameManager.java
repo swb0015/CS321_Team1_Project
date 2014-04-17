@@ -30,11 +30,15 @@ public class GameManager {
     public static GameManager getInstance() {
        if(instance == null) {
           instance = new GameManager();
-       }
+       
        player = new GameCharacter();
+       }
        return instance;
     }
-    
+    public GameCharacter getDealer(){
+        return currentGame.getDealer();
+    }
+            
     public void initializeGame(){
         currentFloor = new Floor();
         currentRoom = currentFloor.getCurrentRoom();
@@ -48,6 +52,7 @@ public class GameManager {
      public void setCurrentRoom(){
          currentRoom = currentFloor.getCurrentRoom();
      }
+     
 
      public void setCurrentGame(){
          currentGame = ((Room_Game)currentRoom).getGame();
@@ -68,7 +73,7 @@ public class GameManager {
          gameInProgress = true;
          
          currentGame.deal();
-         
+         /*
          while(gameInProgress){
             String input = in.next();
              switch (input) {
@@ -80,12 +85,12 @@ public class GameManager {
                      break;
              }
          }
-         
+         */
          ((Room_Game)currentRoom).setGamePlayed();
      }
      
-     public void listenForMove(){
-            String input = in.next();
+     public void listenForMove(String input){
+            //String input = in.next();
              switch (input) {
                  case "left":
                      if(currentRoom!=currentFloor.getStore()){
@@ -108,10 +113,18 @@ public class GameManager {
                  case "store":
                      currentRoom = currentFloor.goToStore();
                      break;
+                 case "hit":
+                     gameInProgress = !currentGame.hit();
+                     break;
+                 case "stay":
+                     gameInProgress = !currentGame.stay();
+                     break;
                  case "exit":
                      currentRoom = currentFloor.exitStore();
                      break;
              }
+             if(!gameInProgress)
+                 currentGame.deal();
      }
      
      public void saveGame(){

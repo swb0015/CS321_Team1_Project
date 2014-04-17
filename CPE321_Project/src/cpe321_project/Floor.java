@@ -19,7 +19,7 @@ public class Floor {
     private Room currentRoom;
     private Room previousRoom;
     private final Room store;
-    private static final int numRooms = 10;
+    private static final int numRooms = 9;
     
     public Floor(){
         roomArray = new ArrayList<>();
@@ -27,12 +27,14 @@ public class Floor {
         store = new Room_Store();
         firstRoom = new Room_Game(null,null,1);
         firstRoom.setRoomDescription("This is the first room\n");
+        firstRoom.setRoomPictureURL("/cpe321_project/Room_1.jpg");
         previousRoom = firstRoom;
         roomArray.add(firstRoom);
         
         for (int i =2;i<=numRooms;i++){
             currentRoom = new Room_Game(previousRoom,null,i);
             currentRoom.setRoomDescription("This is game room " + i + "\n");
+            currentRoom.setRoomPictureURL("/cpe321_project/Room_" + i + ".jpg");
             previousRoom.setRoomRight(currentRoom);
             previousRoom = currentRoom;
             roomArray.add(currentRoom);
