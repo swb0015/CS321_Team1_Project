@@ -113,7 +113,7 @@ public class BlackJack {
     
     public boolean hit(){
         form.AddToStatusBar("You chose to hit.");
-        form.AddToStatusBar("You chose to hit.");
+        //form.AddToStatusBar("You chose to hit.");
         player.addCard(deck.dealCard());
         form.AddToStatusBar("Your hand:");
         player.printHand();

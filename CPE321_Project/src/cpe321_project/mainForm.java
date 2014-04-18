@@ -60,6 +60,7 @@ public class mainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         startPanel1 = new cpe321_project.startPanel();
         startButton = new javax.swing.JButton();
@@ -74,9 +75,21 @@ public class mainForm extends javax.swing.JFrame {
         dealerCardsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         statusTextArea = new cpe321_project.TransparentTextArea();
+        storePanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(800, 600));
         jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -192,6 +205,19 @@ public class mainForm extends javax.swing.JFrame {
 
         jLayeredPane1.add(backGroundPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        storePanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        storePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Go Back To Casino");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        storePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 180, 40));
+
+        jLayeredPane1.add(storePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -10, 810, 600));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -243,6 +269,7 @@ public class mainForm extends javax.swing.JFrame {
     private void HideAllPanelsExcept(JPanel panel){
         startPanel1.setVisible(false);
         backGroundPanel1.setVisible(false);
+        storePanel.setVisible(false);
         panel.setVisible(true);
         jLayeredPane1.moveToFront(panel);
     }
@@ -258,6 +285,9 @@ public class mainForm extends javax.swing.JFrame {
 
     private void storeDoorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDoorButton1ActionPerformed
         // TODO add your handling code here:
+        GameManager manager = GameManager.getInstance();
+        manager.listenForMove("store");
+        HideAllPanelsExcept(storePanel);
     }//GEN-LAST:event_storeDoorButton1ActionPerformed
 
     private void storeDoorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDoorButtonActionPerformed
@@ -293,6 +323,14 @@ public class mainForm extends javax.swing.JFrame {
         backGroundPanel1.revalidate();
 
     }//GEN-LAST:event_leftDoorButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        GameManager manager = GameManager.getInstance();
+        manager.listenForMove("exit");
+        DiplayAllHands();
+        HideAllPanelsExcept(backGroundPanel1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 /**/
     /**
      * @param args the command line arguments
@@ -335,7 +373,9 @@ public class mainForm extends javax.swing.JFrame {
     private cpe321_project.backGroundPanel backGroundPanel1;
     private javax.swing.JPanel dealerCardsPanel;
     private javax.swing.JButton hitButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton leftDoorButton;
     private javax.swing.JButton quitButton;
@@ -345,6 +385,7 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JButton stayButton;
     private javax.swing.JButton storeDoorButton;
     private javax.swing.JButton storeDoorButton1;
+    private javax.swing.JPanel storePanel;
     private javax.swing.JPanel userCardsPanel;
     // End of variables declaration//GEN-END:variables
 }

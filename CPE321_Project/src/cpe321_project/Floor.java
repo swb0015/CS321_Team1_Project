@@ -42,7 +42,11 @@ public class Floor {
         firstRoom.setRoomLeft(currentRoom);
         currentRoom.setRoomRight(firstRoom);
         currentRoom = firstRoom;
-
+        
+        //Add Store Image
+        store.setRoomPictureURL("/cpe321_project/.jpg");
+        store.setRoomDescription("This is the Store");
+      
     }
     
     public Room moveLeft(){
