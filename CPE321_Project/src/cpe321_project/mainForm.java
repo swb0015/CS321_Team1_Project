@@ -75,6 +75,7 @@ public class mainForm extends javax.swing.JFrame {
         dealerCardsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         statusTextArea = new cpe321_project.TransparentTextArea();
+        moneyLabel = new javax.swing.JLabel();
         storePanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -90,25 +91,35 @@ public class mainForm extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(800, 600));
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLayeredPane1.setLayout(new javax.swing.OverlayLayout(jLayeredPane1));
 
         startPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
         startPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
             }
         });
-        startPanel1.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 214, 121, 56));
+        startPanel1.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 121, 56));
 
         quitButton.setBorderPainted(false);
+        quitButton.setOpaque(false);
+        quitButton.setContentAreaFilled(false);
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
         startPanel1.add(quitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 214, 123, 56));
 
-        jLayeredPane1.add(startPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLayeredPane1.add(startPanel1);
 
         backGroundPanel1.setBackground(new java.awt.Color(0, 204, 0));
         backGroundPanel1.setAutoscrolls(true);
@@ -124,7 +135,7 @@ public class mainForm extends javax.swing.JFrame {
                 leftDoorButtonActionPerformed(evt);
             }
         });
-        backGroundPanel1.add(leftDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(689, 6, 110, 155));
+        backGroundPanel1.add(leftDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 110, 155));
 
         hitButton.setText("Hit");
         hitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +143,7 @@ public class mainForm extends javax.swing.JFrame {
                 hitButtonActionPerformed(evt);
             }
         });
-        backGroundPanel1.add(hitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 57, 39));
+        backGroundPanel1.add(hitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 90, 39));
 
         stayButton.setText("Stay");
         stayButton.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +151,7 @@ public class mainForm extends javax.swing.JFrame {
                 stayButtonActionPerformed(evt);
             }
         });
-        backGroundPanel1.add(stayButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 57, 39));
+        backGroundPanel1.add(stayButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 90, 39));
 
         storeDoorButton.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.background"));
         storeDoorButton.setBorderPainted(false);
@@ -201,9 +212,13 @@ public class mainForm extends javax.swing.JFrame {
         statusTextArea.setRows(5);
         jScrollPane1.setViewportView(statusTextArea);
 
-        backGroundPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 799, 93));
+        backGroundPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 799, 110));
 
-        jLayeredPane1.add(backGroundPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        moneyLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        moneyLabel.setText("$0");
+        backGroundPanel1.add(moneyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, -10, 160, 40));
+
+        jLayeredPane1.add(backGroundPanel1);
 
         storePanel.setMinimumSize(new java.awt.Dimension(800, 600));
         storePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -216,22 +231,9 @@ public class mainForm extends javax.swing.JFrame {
         });
         storePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 180, 40));
 
-        jLayeredPane1.add(storePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -10, 810, 600));
+        jLayeredPane1.add(storePanel);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 562));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -256,6 +258,12 @@ public class mainForm extends javax.swing.JFrame {
             thePanel.add(label);
         }
         thePanel.revalidate();
+        
+        //Display Player Score
+        GameManager manager = GameManager.getInstance();
+        int score = manager.getPlayer().getPoints();
+        String str = "$" + Integer.toString(score);
+        moneyLabel.setText(str);
      
     }
     private void DiplayAllHands()
@@ -304,6 +312,11 @@ public class mainForm extends javax.swing.JFrame {
         GameManager manager = GameManager.getInstance();
         manager.listenForMove("stay");
         DiplayAllHands();
+        
+        //Update Player Score
+        int score = manager.getPlayer().getPoints();
+        String str = "$" + Integer.toString(score);
+        moneyLabel.setText(str);
     }//GEN-LAST:event_stayButtonActionPerformed
 
     private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
@@ -311,6 +324,11 @@ public class mainForm extends javax.swing.JFrame {
         GameManager manager = GameManager.getInstance();
         manager.listenForMove("hit");
         DiplayAllHands();
+        
+        //Update Player Score
+        int score = manager.getPlayer().getPoints();
+        String str = "$" + Integer.toString(score);
+        moneyLabel.setText(str);
 
     }//GEN-LAST:event_hitButtonActionPerformed
 
@@ -331,6 +349,29 @@ public class mainForm extends javax.swing.JFrame {
         DiplayAllHands();
         HideAllPanelsExcept(backGroundPanel1);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        // TODO add your handling code here:
+        HideAllPanelsExcept(startPanel1);
+        Object[] options = {"Quit", "Nope"};
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showOptionDialog(frame, 
+                "Are you sure you want to quit",
+                "Quitters aren't cool",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+              
+        if(n == JOptionPane.YES_OPTION)
+            System.exit(0);
+        else
+        {
+            frame.setVisible(false);
+            frame.dispose();
+        }
+    }//GEN-LAST:event_quitButtonActionPerformed
 /**/
     /**
      * @param args the command line arguments
@@ -378,6 +419,7 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton leftDoorButton;
+    private javax.swing.JLabel moneyLabel;
     private javax.swing.JButton quitButton;
     private javax.swing.JButton startButton;
     private cpe321_project.startPanel startPanel1;

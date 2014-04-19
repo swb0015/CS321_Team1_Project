@@ -22,7 +22,7 @@ public class BlackJack {
     private boolean dealerBlackJack;
     private int ante;
     private final Deck deck;
-    private final mainForm form = mainForm.getInstance();;
+    private final mainForm form = mainForm.getInstance();
     public BlackJack(int gameNumber){
         dealer = initialize(gameNumber);
         player = manager.getPlayer();

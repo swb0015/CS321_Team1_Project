@@ -15,5 +15,6 @@ public class Room_Store extends Room{
         setRoomDescription("This is the store\n");
         setRoomLeft(this);
         setRoomRight(this);
+        setRoomPictureURL("/cpe321_project/Room_store.jpg");   
     }
 }
