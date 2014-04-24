@@ -65,6 +65,10 @@ public class Hand {
     
     public void showHidden(){
         for(Card card:cards){
+            if(card.getHidden())
+            {
+                form.AddToStatusBar("Hidden Card was: " + card.getFace() + " of " + card.getSuit());
+            }
             card.setHidden(false);
         }
     }

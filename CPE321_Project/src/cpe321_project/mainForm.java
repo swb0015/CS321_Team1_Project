@@ -35,6 +35,12 @@ public class mainForm extends javax.swing.JFrame {
         DisplayHand(currentHand, userCardsPanel);
         DisplayHand(dealerHand, dealerCardsPanel); */
     }
+    public void ClearStatusBar(){
+        statusTextArea.setText("");
+        DefaultCaret caret = (DefaultCaret)statusTextArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        statusTextArea.revalidate();
+    }
     public void AddToStatusBar(String text){
         statusTextArea.append(text + "\n");
         DefaultCaret caret = (DefaultCaret)statusTextArea.getCaret();
@@ -314,9 +320,9 @@ public class mainForm extends javax.swing.JFrame {
         DiplayAllHands();
         
         //Update Player Score
-        int score = manager.getPlayer().getPoints();
-        String str = "$" + Integer.toString(score);
-        moneyLabel.setText(str);
+        //int score = manager.getPlayer().getPoints();
+        //String str = "$" + Integer.toString(score);
+        //moneyLabel.setText(str);
     }//GEN-LAST:event_stayButtonActionPerformed
 
     private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
@@ -326,9 +332,9 @@ public class mainForm extends javax.swing.JFrame {
         DiplayAllHands();
         
         //Update Player Score
-        int score = manager.getPlayer().getPoints();
-        String str = "$" + Integer.toString(score);
-        moneyLabel.setText(str);
+        //int score = manager.getPlayer().getPoints();
+        //String str = "$" + Integer.toString(score);
+        //moneyLabel.setText(str);
 
     }//GEN-LAST:event_hitButtonActionPerformed
 

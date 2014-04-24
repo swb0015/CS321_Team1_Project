@@ -124,7 +124,11 @@ public class GameManager {
                      break;
              }
              if(!gameInProgress)
-                 currentGame.deal();
+             {
+
+                currentGame.deal();
+                 
+             }
      }
      
      public void saveGame(){

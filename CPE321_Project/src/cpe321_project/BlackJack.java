@@ -86,86 +86,92 @@ public class BlackJack {
     }
     
     public void playerWin(String msg){
+        form.ClearStatusBar();
         dealer.showHiddenCards();
-        form.AddToStatusBar("Your hand:");
-        player.printHand();
-        form.AddToStatusBar(dealer.getName()+"'s hand:");
-        dealer.printHand();
+        //form.AddToStatusBar("Your hand:");
+        //player.printHand();
+        //form.AddToStatusBar(dealer.getName()+"'s hand:");
+        //dealer.printHand();
         form.AddToStatusBar(msg);
         form.AddToStatusBar(dealer.getName()+" says: "+dealer.getLoseString()+"\n");
         player.changePoints(ante*player.getMultiplier());
     }
     
     public void playerLose(String msg){
+        form.ClearStatusBar();
         dealer.showHiddenCards();
-        form.AddToStatusBar("Your hand:");
-        player.printHand();
-        form.AddToStatusBar(dealer.getName()+"'s hand:");
-        dealer.printHand();
+        //form.AddToStatusBar("Your hand:");
+        //player.printHand();
+        //form.AddToStatusBar(dealer.getName()+"'s hand:");
+        //dealer.printHand();
         form.AddToStatusBar(msg);
         form.AddToStatusBar(dealer.getName()+" says: "+dealer.getWinString()+"\n");
         player.changePoints(-ante);
     }
     
     public void gameTied(){
+        form.ClearStatusBar();
         form.AddToStatusBar("It's a tie!");
     }
     
     public boolean hit(){
-        form.AddToStatusBar("You chose to hit.");
+        form.ClearStatusBar();
+        //form.AddToStatusBar("You chose to hit.");
         //form.AddToStatusBar("You chose to hit.");
         player.addCard(deck.dealCard());
-        form.AddToStatusBar("Your hand:");
-        player.printHand();
+        //form.AddToStatusBar("Your hand:");
+        //player.printHand();
         if (roundOver()) return true;
         else if (dealerStay){
-            form.AddToStatusBar(dealer.getName()+" stands with "+dealerScore+".\n");
+            //form.AddToStatusBar(dealer.getName()+" stands with "+dealerScore+".\n");
             return roundOver();
         }
         else {
             do {
-                form.AddToStatusBar(dealer.getName()+" chose to hit.");
+                //form.AddToStatusBar(dealer.getName()+" chose to hit.");
                 dealer.addCard(deck.dealCard());
-                form.AddToStatusBar(dealer.getName()+"'s hand:");
-                dealer.printHand();
+                //form.AddToStatusBar(dealer.getName()+"'s hand:");
+                //dealer.printHand();
             } while (playerStay || !roundOver());
-            form.AddToStatusBar(dealer.getName()+" chose to stay.\n");
+            //form.AddToStatusBar(dealer.getName()+" chose to stay.\n");
             return roundOver();
         }
     }
     
     public boolean stay(){
-        form.AddToStatusBar("You chose to stay.\n");
+        form.ClearStatusBar();
+        //form.AddToStatusBar("You chose to stay.\n");
         playerStay = true;
         if (roundOver()) return true;
         else {
             while (!roundOver()){
-                form.AddToStatusBar(dealer.getName()+" chose to hit.");
+                //form.AddToStatusBar(dealer.getName()+" chose to hit.");
                 dealer.addCard(deck.dealCard());
-                form.AddToStatusBar(dealer.getName()+"'s hand:");
-                dealer.printHand();
+                //form.AddToStatusBar(dealer.getName()+"'s hand:");
+                //dealer.printHand();
             }
             return true;
         }
     }
     
     public boolean deal(){
+        //form.ClearStatusBar();
         player.setupForGame();
         dealer.setupForGame();
-        form.AddToStatusBarNoReturn("Player ");
+        //form.AddToStatusBarNoReturn("Player ");
         player.addCard(deck.dealCard());
         Card holeCard = deck.dealCard();
         holeCard.setHidden(true);
-        form.AddToStatusBarNoReturn(dealer.getName()+" ");
+        //form.AddToStatusBarNoReturn(dealer.getName()+" ");
         dealer.addCard(holeCard);
-        form.AddToStatusBarNoReturn("Player ");
+        //form.AddToStatusBarNoReturn("Player ");
         player.addCard(deck.dealCard());
-        form.AddToStatusBarNoReturn(dealer.getName()+" ");
+        //form.AddToStatusBarNoReturn(dealer.getName()+" ");
         dealer.addCard(deck.dealCard());
-        form.AddToStatusBar("\nYour hand:");
-        player.printHand();
-        form.AddToStatusBar(dealer.getName()+"'s hand:");
-        dealer.printHand();
+        //form.AddToStatusBar("\nYour hand:");
+        //player.printHand();
+        //form.AddToStatusBar(dealer.getName()+"'s hand:");
+        //dealer.printHand();
         return false;
         //return roundOver();
     }

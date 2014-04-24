@@ -109,8 +109,8 @@ public class GameCharacter {
     
     public void addCard(Card c){
         hand.addCard(c);
-        form.AddToStatusBarNoReturn("Card dealt: ");
-        c.printCard();
+        //form.AddToStatusBarNoReturn("Card dealt: ");
+        //c.printCard();
     }
     
     public int getHandScore(){
