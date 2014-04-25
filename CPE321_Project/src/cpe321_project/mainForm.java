@@ -251,11 +251,11 @@ public class mainForm extends javax.swing.JFrame {
         for(Card e: currentHand.getCards())
         {
             JLabel label;
-            if(e.getHidden())
-                label = new JLabel(" ");
-            else
-                label = new JLabel("<html>" + e.getFace() + " of" + "<br>" + e.getSuit() + "<html>");
-            label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 10));
+            if(e.getHidden()){
+                label = new JLabel("<html><img src='"+getClass().getResource("/cpe321_project/cards/b1fv.gif")+"' width=44 height=59></html>");
+            }else{
+                label = new JLabel("<html><img src='"+getClass().getResource("/cpe321_project/cards/"+((""+e.getSuit().charAt(0)+e.getFace()+".gif").toLowerCase()))+"' width=44 height=59></html>");
+            }
             
             label.setBorder(new javax.swing.border.LineBorder(Color.BLACK));
             label.setPreferredSize(new Dimension(45, 60));
