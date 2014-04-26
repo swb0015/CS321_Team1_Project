@@ -63,6 +63,7 @@ public class BlackJack {
         if (!dealerStay && dealerScore >= dealer.getLimit()){
             dealerStay = true;
             if (dealerScore == 21 && dealerCardCount == 2) dealerBlackJack = true;
+            return false;
         }        
         
         if (playerBlackJack && dealerBlackJack){
@@ -75,7 +76,7 @@ public class BlackJack {
             playerLose("You lose!",m);
             return true;
         } else if (playerStay && dealerStay && playerScore == dealerScore){
-            playerLose("It was a tie! You keep your money!",m);
+            gameTied(m);
             return true;
         } else if (playerStay && dealerStay && playerScore > dealerScore){
             playerWin("You win!",m);
@@ -115,9 +116,10 @@ public class BlackJack {
     }
     
     public void gameTied(mainForm m){
-        m.DiplayAllHands();
         form.ClearStatusBar();
-        form.AddToStatusBar("It was a tie, so you lose!");
+        dealer.showHiddenCards();
+        m.DiplayAllHands();
+        form.AddToStatusBar("It was a tie, so you keep your money!");
         m.handOver();
     }
     
@@ -169,6 +171,14 @@ public class BlackJack {
     public boolean deal(mainForm m){
         //form.ClearStatusBar();
         deck.shuffleDeck();
+        playerScore = 0;
+        dealerScore = 0;
+        playerCardCount = 0;
+        dealerCardCount = 0;
+        playerStay = false;
+        dealerStay = false;
+        playerBlackJack = false;
+        dealerBlackJack = false;
         player.setupForGame();
         dealer.setupForGame();
         //form.AddToStatusBarNoReturn("Player ");
@@ -201,15 +211,15 @@ public class BlackJack {
                 ante = (int)(20 * 1);
                 break;
             case 2:
-                dealer = new GameCharacter("Le Chiffre ","Example description.","You are the loser!","You are the winner!",17);
+                dealer = new GameCharacter("Le Chiffre ","Example description.","You are the loser!","You are the winner!",19);
                 ante = (int) (20 * 1.5);
                 break;
             case 3:
-                dealer = new GameCharacter("Spock ","Example description.","You are the loser!","You are the winner!",17);
+                dealer = new GameCharacter("Data ","Example description.","You are the loser!","You are the winner!",18);
                 ante = (int) (20 * 2.5);
                 break;
             case 4:
-                dealer = new GameCharacter("Bubba ","Example description.","You are the loser!","You are the winner!",17);
+                dealer = new GameCharacter("Bubba ","Example description.","You are the loser!","You are the winner!",18);
                 ante = (int)(20 * 3);
                 break;
             case 5:

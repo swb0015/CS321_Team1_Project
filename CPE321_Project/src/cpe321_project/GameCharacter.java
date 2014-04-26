@@ -129,6 +129,10 @@ public class GameCharacter {
         return points;
     }
     
+    public void setPoints(int p){
+        points = p;
+    }
+    
     public void changePoints(int adjust){
         points += adjust;
         if (points < 0) points = 0;

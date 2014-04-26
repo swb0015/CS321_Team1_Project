@@ -15,7 +15,6 @@ public class Item_CarKeys extends Item{
     
    @Override
     public void use(GameCharacter opponent, GameCharacter user){
-        System.out.println("You made the dealer hit!\n");
         GameManager manager = GameManager.getInstance();
         if(manager.getPlayer().getPoints() >= this.getCost())
         {

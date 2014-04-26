@@ -26,6 +26,7 @@ public class mainForm extends javax.swing.JFrame {
 
         
         initComponents();
+        startPanel1.paint(startPanel1.getGraphics());
         /*
         GameManager manager = GameManager.getInstance();
          
@@ -364,7 +365,29 @@ public class mainForm extends javax.swing.JFrame {
     public void PlayerWins(){
         GameManager manager = GameManager.getInstance();
         manager.listenForMove("win",this);
-            HideAllPanelsExcept(winPanel);
+        HideAllPanelsExcept(winPanel);
+    }
+    
+    public void PlayerLoses(){
+        GameManager manager = GameManager.getInstance();
+        manager.listenForMove("lose",this);
+        HideAllPanelsExcept(startPanel1);
+        Object[] options = {"I Suck"};
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showOptionDialog(frame, 
+                "You ran out of money.",
+                "You lose.",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+              
+//        if(n == JOptionPane.YES_OPTION){
+//            frame.setVisible(false);
+//            frame.dispose();
+//        }
+        startPanel1.paint(startPanel1.getGraphics());
     }
 
     
@@ -396,6 +419,7 @@ public class mainForm extends javax.swing.JFrame {
         int score = manager.getPlayer().getPoints();
         String str = "$" + Integer.toString(score);
         moneyLabel.setText(str);
+        
      
     }
     public void DiplayAllHands()
@@ -410,6 +434,11 @@ public class mainForm extends javax.swing.JFrame {
             Thread.sleep(500);
         } catch(InterruptedException e) {
             
+        }
+        int score = manager.getPlayer().getPoints();
+        if (score <= 0){
+            mainForm form = mainForm.getInstance();
+            form.PlayerLoses();
         }
     }
     private void HideAllPanelsExcept(JPanel panel){
@@ -430,6 +459,9 @@ public class mainForm extends javax.swing.JFrame {
         userCardsPanel.removeAll();
         dealerCardsPanel.removeAll();
         ClearStatusBar();
+        int score = manager.getPlayer().getPoints();
+        String str = "$" + Integer.toString(score);
+        moneyLabel.setText(str);
         backGroundPanel1.paint(backGroundPanel1.getGraphics());
     }//GEN-LAST:event_startButtonActionPerformed
 

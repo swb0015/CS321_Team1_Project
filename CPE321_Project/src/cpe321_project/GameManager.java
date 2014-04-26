@@ -43,6 +43,7 @@ public class GameManager {
         currentFloor = new Floor();
         currentRoom = currentFloor.getCurrentRoom();
         currentGame = ((Room_Game)currentRoom).getGame();
+        player.setPoints(100);
     }
     
     public GameCharacter getPlayer(){
@@ -124,6 +125,9 @@ public class GameManager {
                      break;
                  case "win":
                      currentRoom = currentFloor.goToWinRoom();
+                     break;
+                 case "lose":
+                     //currentRoom = currentFloor.goToWinRoom();
                      break;
                          
              }
