@@ -122,6 +122,10 @@ public class GameManager {
                  case "exit":
                      currentRoom = currentFloor.exitStore();
                      break;
+                 case "win":
+                     currentRoom = currentFloor.goToWinRoom();
+                     break;
+                         
              }
 //             if(!gameInProgress)
 //             {

@@ -7,6 +7,7 @@
 package cpe321_project;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 
@@ -86,8 +87,11 @@ public class mainForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         statusTextArea = new cpe321_project.TransparentTextArea();
         moneyLabel = new javax.swing.JLabel();
-        storePanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        storePanel = new cpe321_project.backGroundPanel();
+        goBackButton = new javax.swing.JButton();
+        storeInventory = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        winPanel = new cpe321_project.backGroundPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,7 +180,6 @@ public class mainForm extends javax.swing.JFrame {
         hitButton.setFocusPainted(false);
         hitButton.setFocusable(false);
         hitButton.setRequestFocusEnabled(false);
-        hitButton.setRolloverEnabled(false);
         hitButton.setVerifyInputWhenFocusTarget(false);
         hitButton.setVisible(false);
         hitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -302,18 +305,49 @@ public class mainForm extends javax.swing.JFrame {
 
         jLayeredPane1.add(backGroundPanel1);
 
-        storePanel.setMinimumSize(new java.awt.Dimension(800, 600));
         storePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Go Back To Casino");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        goBackButton.setText("Go Back to Room");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                goBackButtonActionPerformed(evt);
             }
         });
-        storePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 180, 40));
+        storePanel.add(goBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 140, 60));
+
+        storeInventory.setBackground(new java.awt.Color(255, 255, 255));
+        storeInventory.setOpaque(false);
+
+        javax.swing.GroupLayout storeInventoryLayout = new javax.swing.GroupLayout(storeInventory);
+        storeInventory.setLayout(storeInventoryLayout);
+        storeInventoryLayout.setHorizontalGroup(
+            storeInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        storeInventoryLayout.setVerticalGroup(
+            storeInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        storePanel.add(storeInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 300, 350));
+
+        jLabel1.setText("Store Inventory");
+        storePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         jLayeredPane1.add(storePanel);
+
+        javax.swing.GroupLayout winPanelLayout = new javax.swing.GroupLayout(winPanel);
+        winPanel.setLayout(winPanelLayout);
+        winPanelLayout.setHorizontalGroup(
+            winPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        winPanelLayout.setVerticalGroup(
+            winPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jLayeredPane1.add(winPanel);
 
         getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 562));
 
@@ -326,6 +360,13 @@ public class mainForm extends javax.swing.JFrame {
         hitButton.setVisible(false);
         stayButton.setVisible(false);
     }
+    
+    public void PlayerWins(){
+        GameManager manager = GameManager.getInstance();
+        manager.listenForMove("win",this);
+            HideAllPanelsExcept(winPanel);
+    }
+
     
     private void DisplayHand(Hand currentHand, JPanel thePanel){
         thePanel.removeAll();
@@ -399,6 +440,28 @@ public class mainForm extends javax.swing.JFrame {
             manager.listenForMove("store",this);
             HideAllPanelsExcept(storePanel);
             ClearStatusBar();
+            storeInventory.removeAll();
+            storeInventory.setLayout(new java.awt.FlowLayout());
+            
+            for(final Item item: manager.getCurrentFloor().getStore().GetInventory()){
+                JLabel itemIcon = new JLabel(new javax.swing.ImageIcon(getClass().getResource(item.getIconURL())));
+                itemIcon.setPreferredSize(new Dimension(60, 80));
+                itemIcon.setText(String.valueOf(item.getCost()));
+                itemIcon.setHorizontalTextPosition(JLabel.CENTER);
+                itemIcon.setVerticalTextPosition(JLabel.BOTTOM);
+                itemIcon.setOpaque(true);
+                itemIcon.addMouseListener(new MouseAdapter() { 
+                @Override
+                public void mousePressed(MouseEvent me) { 
+                System.out.println("Clicked"); 
+                item.use(null, null);
+                } 
+                });
+                storeInventory.add(itemIcon);
+                storeInventory.repaint();
+                storeInventory.revalidate();
+                
+            }
         }
     }//GEN-LAST:event_storeDoorButtonActionPerformed
 
@@ -456,20 +519,6 @@ public class mainForm extends javax.swing.JFrame {
             backGroundPanel1.paint(backGroundPanel1.getGraphics());
         }
     }//GEN-LAST:event_rightDoorButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        GameManager manager = GameManager.getInstance();
-        manager.listenForMove("exit",this);
-        HideAllPanelsExcept(backGroundPanel1);
-        playButton.setVisible(true);
-        hitButton.setVisible(false);
-        stayButton.setVisible(false);
-        userCardsPanel.removeAll();
-        dealerCardsPanel.removeAll();
-        ClearStatusBar();
-        backGroundPanel1.paint(backGroundPanel1.getGraphics());
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         // TODO add your handling code here:
@@ -566,6 +615,19 @@ public class mainForm extends javax.swing.JFrame {
         manager.playGame(this);
         DiplayAllHands();
     }//GEN-LAST:event_playButtonActionPerformed
+
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+         GameManager manager = GameManager.getInstance();
+        manager.listenForMove("exit",this);
+        HideAllPanelsExcept(backGroundPanel1);
+        playButton.setVisible(true);
+        hitButton.setVisible(false);
+        stayButton.setVisible(false);
+        userCardsPanel.removeAll();
+        dealerCardsPanel.removeAll();
+        ClearStatusBar();
+        backGroundPanel1.paint(backGroundPanel1.getGraphics());
+    }//GEN-LAST:event_goBackButtonActionPerformed
 /**/
     /**
      * @param args the command line arguments
@@ -610,8 +672,9 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JToggleButton QuitGame;
     private cpe321_project.backGroundPanel backGroundPanel1;
     private javax.swing.JPanel dealerCardsPanel;
+    private javax.swing.JButton goBackButton;
     private javax.swing.JButton hitButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -625,7 +688,9 @@ public class mainForm extends javax.swing.JFrame {
     private cpe321_project.TransparentTextArea statusTextArea;
     private javax.swing.JButton stayButton;
     private javax.swing.JButton storeDoorButton;
-    private javax.swing.JPanel storePanel;
+    private javax.swing.JPanel storeInventory;
+    private cpe321_project.backGroundPanel storePanel;
     private javax.swing.JPanel userCardsPanel;
+    private cpe321_project.backGroundPanel winPanel;
     // End of variables declaration//GEN-END:variables
 }

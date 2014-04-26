@@ -18,12 +18,15 @@ public class Floor {
     private final Room firstRoom;
     private Room currentRoom;
     private Room previousRoom;
-    private final Room store;
+    private final Room_Store store;
+    private final Room winRoom;
     private static final int numRooms = 9;
     
     public Floor(){
         roomArray = new ArrayList<>();
-        
+        winRoom = new Room();
+        winRoom.setRoomDescription("You Win");
+        winRoom.setRoomPictureURL("/cpe321_project/win_screen.jpg");
         store = new Room_Store();
         firstRoom = new Room_Game(null,null,1);
         firstRoom.setRoomDescription("This is the first room\n");
@@ -43,9 +46,10 @@ public class Floor {
         currentRoom.setRoomRight(firstRoom);
         currentRoom = firstRoom;
         
+        
         //Add Store Image
-        store.setRoomPictureURL("/cpe321_project/.jpg");
-        store.setRoomDescription("This is the Store");
+        //store.setRoomPictureURL("/cpe321_project/.jpg");
+        //store.setRoomDescription("This is the Store");
       
     }
     
@@ -85,6 +89,12 @@ public class Floor {
         System.out.print(currentRoom.getRoomDescription());
         return currentRoom;
     }
+    public Room goToWinRoom(){
+        previousRoom = currentRoom;
+        currentRoom = winRoom;
+        System.out.print(currentRoom.getRoomDescription());
+        return currentRoom;
+    }
     
     public Room exitStore(){
         currentRoom = previousRoom;
@@ -92,7 +102,7 @@ public class Floor {
         return currentRoom;
     }
     
-    public Room getStore(){
+    public Room_Store getStore(){
         return store;
     }
     

@@ -15,6 +15,8 @@ public abstract class Item {
     private String description;
     private int chargeTime;
     private int chargeLevel;
+    private int cost;
+    private String iconURL;
     
     public Item(){
         name = "Magic Item";
@@ -29,7 +31,19 @@ public abstract class Item {
         chargeTime = t;
         chargeLevel = t;
     }
-    
+    public void setIconURL(String URL){
+        iconURL = URL;
+    }
+            
+    public String getIconURL(){
+        return iconURL;
+    }
+    public void setCost(int setcost){
+        cost = setcost;
+    }
+    public int getCost(){
+        return cost;
+    }
     public String getName(){
         return name;
     }
