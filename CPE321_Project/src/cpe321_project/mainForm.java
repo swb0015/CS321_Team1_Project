@@ -72,11 +72,15 @@ public class mainForm extends javax.swing.JFrame {
         startButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
         backGroundPanel1 = new cpe321_project.backGroundPanel();
-        leftDoorButton = new javax.swing.JButton();
+        rightDoorButton = new javax.swing.JButton();
+        playButton = new javax.swing.JButton();
         hitButton = new javax.swing.JButton();
         stayButton = new javax.swing.JButton();
+        leftDoorButton = new javax.swing.JButton();
         storeDoorButton = new javax.swing.JButton();
-        storeDoorButton1 = new javax.swing.JButton();
+        NewGame = new javax.swing.JToggleButton();
+        Help = new javax.swing.JToggleButton();
+        QuitGame = new javax.swing.JToggleButton();
         userCardsPanel = new javax.swing.JPanel();
         dealerCardsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -97,6 +101,7 @@ public class mainForm extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Rocket City Casino");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -108,6 +113,7 @@ public class mainForm extends javax.swing.JFrame {
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);
+        startButton.setContentAreaFilled(false);
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
@@ -116,6 +122,7 @@ public class mainForm extends javax.swing.JFrame {
         startPanel1.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 121, 56));
 
         quitButton.setBorderPainted(false);
+        quitButton.setContentAreaFilled(false);
         quitButton.setOpaque(false);
         quitButton.setContentAreaFilled(false);
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +140,70 @@ public class mainForm extends javax.swing.JFrame {
         backGroundPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
         backGroundPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        rightDoorButton.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.background"));
+        rightDoorButton.setBorderPainted(false);
+        rightDoorButton.setContentAreaFilled(false);
+        rightDoorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rightDoorButtonActionPerformed(evt);
+            }
+        });
+        backGroundPanel1.add(rightDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 110, 155));
+
+        playButton.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        playButton.setForeground(new java.awt.Color(255, 255, 255));
+        playButton.setText("Play");
+        playButton.setBorder(null);
+        playButton.setBorderPainted(false);
+        playButton.setContentAreaFilled(false);
+        playButton.setFocusPainted(false);
+        playButton.setFocusable(false);
+        playButton.setRequestFocusEnabled(false);
+        playButton.setVerifyInputWhenFocusTarget(false);
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+        backGroundPanel1.add(playButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 90, 39));
+
+        hitButton.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        hitButton.setForeground(new java.awt.Color(255, 255, 255));
+        hitButton.setText("Hit");
+        hitButton.setBorder(null);
+        hitButton.setBorderPainted(false);
+        hitButton.setContentAreaFilled(false);
+        hitButton.setFocusPainted(false);
+        hitButton.setFocusable(false);
+        hitButton.setRequestFocusEnabled(false);
+        hitButton.setRolloverEnabled(false);
+        hitButton.setVerifyInputWhenFocusTarget(false);
+        hitButton.setVisible(false);
+        hitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitButtonActionPerformed(evt);
+            }
+        });
+        backGroundPanel1.add(hitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 90, 39));
+
+        stayButton.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        stayButton.setForeground(new java.awt.Color(255, 255, 255));
+        stayButton.setText("Stay");
+        stayButton.setBorder(null);
+        stayButton.setBorderPainted(false);
+        stayButton.setContentAreaFilled(false);
+        stayButton.setDefaultCapable(false);
+        stayButton.setFocusPainted(false);
+        stayButton.setFocusable(false);
+        stayButton.setRequestFocusEnabled(false);
+        stayButton.setVisible(false);
+        stayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stayButtonActionPerformed(evt);
+            }
+        });
+        backGroundPanel1.add(stayButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 90, 39));
+
         leftDoorButton.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.background"));
         leftDoorButton.setBorderPainted(false);
         leftDoorButton.setContentAreaFilled(false);
@@ -141,23 +212,7 @@ public class mainForm extends javax.swing.JFrame {
                 leftDoorButtonActionPerformed(evt);
             }
         });
-        backGroundPanel1.add(leftDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 110, 155));
-
-        hitButton.setText("Hit");
-        hitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hitButtonActionPerformed(evt);
-            }
-        });
-        backGroundPanel1.add(hitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 90, 39));
-
-        stayButton.setText("Stay");
-        stayButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stayButtonActionPerformed(evt);
-            }
-        });
-        backGroundPanel1.add(stayButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 90, 39));
+        backGroundPanel1.add(leftDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 26, 119, 156));
 
         storeDoorButton.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.background"));
         storeDoorButton.setBorderPainted(false);
@@ -167,18 +222,38 @@ public class mainForm extends javax.swing.JFrame {
                 storeDoorButtonActionPerformed(evt);
             }
         });
-        backGroundPanel1.add(storeDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 26, 119, 156));
+        backGroundPanel1.add(storeDoorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 26, 87, 135));
 
-        storeDoorButton1.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.background"));
-        storeDoorButton1.setBorderPainted(false);
-        storeDoorButton1.setContentAreaFilled(false);
-        storeDoorButton1.addActionListener(new java.awt.event.ActionListener() {
+        NewGame.setBorder(null);
+        NewGame.setContentAreaFilled(false);
+        NewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                storeDoorButton1ActionPerformed(evt);
+                NewGameActionPerformed(evt);
             }
         });
-        backGroundPanel1.add(storeDoorButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 26, 87, 135));
+        backGroundPanel1.add(NewGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 20));
 
+        Help.setBorder(null);
+        Help.setContentAreaFilled(false);
+        Help.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HelpActionPerformed(evt);
+            }
+        });
+        backGroundPanel1.add(Help, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 20));
+
+        QuitGame.setBorder(null);
+        QuitGame.setContentAreaFilled(false);
+        QuitGame.setFocusPainted(false);
+        QuitGame.setFocusable(false);
+        QuitGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuitGameActionPerformed(evt);
+            }
+        });
+        backGroundPanel1.add(QuitGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 50, 30));
+
+        userCardsPanel.setBackground(new java.awt.Color(153, 153, 153));
         userCardsPanel.setMinimumSize(new java.awt.Dimension(383, 113));
         userCardsPanel.setOpaque(false);
 
@@ -195,6 +270,7 @@ public class mainForm extends javax.swing.JFrame {
 
         backGroundPanel1.add(userCardsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 222, 70));
 
+        dealerCardsPanel.setBackground(new java.awt.Color(153, 153, 153));
         dealerCardsPanel.setMinimumSize(new java.awt.Dimension(383, 113));
         dealerCardsPanel.setOpaque(false);
 
@@ -242,11 +318,19 @@ public class mainForm extends javax.swing.JFrame {
         getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 562));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void handOver(){
+        playButton.setVisible(true);
+        hitButton.setVisible(false);
+        stayButton.setVisible(false);
+    }
+    
     private void DisplayHand(Hand currentHand, JPanel thePanel){
         thePanel.removeAll();
-        thePanel.repaint();
+        //thePanel.revalidate();
+        //thePanel.repaint();
         thePanel.setLayout(new java.awt.FlowLayout());
         for(Card e: currentHand.getCards())
         {
@@ -263,7 +347,8 @@ public class mainForm extends javax.swing.JFrame {
             label.setOpaque(true);
             thePanel.add(label);
         }
-        thePanel.revalidate();
+        //thePanel.revalidate();
+        //thePanel.repaint();
         
         //Display Player Score
         GameManager manager = GameManager.getInstance();
@@ -272,13 +357,19 @@ public class mainForm extends javax.swing.JFrame {
         moneyLabel.setText(str);
      
     }
-    private void DiplayAllHands()
+    public void DiplayAllHands()
     {
         GameManager manager = GameManager.getInstance();
         Hand currentHand = manager.getPlayer().getHand();
         Hand dealerHand = manager.getDealer().getHand();
         DisplayHand(currentHand, userCardsPanel);
         DisplayHand(dealerHand, dealerCardsPanel);
+        backGroundPanel1.paint(backGroundPanel1.getGraphics());
+        try {
+            Thread.sleep(500);
+        } catch(InterruptedException e) {
+            
+        }
     }
     private void HideAllPanelsExcept(JPanel panel){
         startPanel1.setVisible(false);
@@ -290,33 +381,46 @@ public class mainForm extends javax.swing.JFrame {
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
         GameManager manager = GameManager.getInstance();
-         
         manager.initializeGame();
-        manager.playGame();
-        DiplayAllHands();
         HideAllPanelsExcept(backGroundPanel1);
+        playButton.setVisible(true);
+        hitButton.setVisible(false);
+        stayButton.setVisible(false);
+        userCardsPanel.removeAll();
+        dealerCardsPanel.removeAll();
+        ClearStatusBar();
+        backGroundPanel1.paint(backGroundPanel1.getGraphics());
     }//GEN-LAST:event_startButtonActionPerformed
-
-    private void storeDoorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDoorButton1ActionPerformed
-        // TODO add your handling code here:
-        GameManager manager = GameManager.getInstance();
-        manager.listenForMove("store");
-        HideAllPanelsExcept(storePanel);
-    }//GEN-LAST:event_storeDoorButton1ActionPerformed
 
     private void storeDoorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDoorButtonActionPerformed
         // TODO add your handling code here:
         GameManager manager = GameManager.getInstance();
-        manager.listenForMove("left");
-        DiplayAllHands();
-        backGroundPanel1.repaint();
-        backGroundPanel1.revalidate();
+        if (!manager.gameInProgress){
+            manager.listenForMove("store",this);
+            HideAllPanelsExcept(storePanel);
+            ClearStatusBar();
+        }
     }//GEN-LAST:event_storeDoorButtonActionPerformed
+
+    private void leftDoorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDoorButtonActionPerformed
+        // TODO add your handling code here:
+        GameManager manager = GameManager.getInstance();
+        if (!manager.gameInProgress){
+            manager.listenForMove("left",this);
+            playButton.setVisible(true);
+            hitButton.setVisible(false);
+            stayButton.setVisible(false);
+            userCardsPanel.removeAll();
+            dealerCardsPanel.removeAll();
+            ClearStatusBar();
+            backGroundPanel1.paint(backGroundPanel1.getGraphics());
+        }
+    }//GEN-LAST:event_leftDoorButtonActionPerformed
 
     private void stayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stayButtonActionPerformed
         // TODO add your handling code here:
         GameManager manager = GameManager.getInstance();
-        manager.listenForMove("stay");
+        manager.listenForMove("stay",this);
         DiplayAllHands();
         
         //Update Player Score
@@ -328,7 +432,7 @@ public class mainForm extends javax.swing.JFrame {
     private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
         // TODO add your handling code here:
         GameManager manager = GameManager.getInstance();
-        manager.listenForMove("hit");
+        manager.listenForMove("hit",this);
         DiplayAllHands();
         
         //Update Player Score
@@ -338,22 +442,33 @@ public class mainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_hitButtonActionPerformed
 
-    private void leftDoorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDoorButtonActionPerformed
+    private void rightDoorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightDoorButtonActionPerformed
         // TODO add your handling code here:
         GameManager manager = GameManager.getInstance();
-        manager.listenForMove("right");
-        DiplayAllHands();
-        backGroundPanel1.repaint();
-        backGroundPanel1.revalidate();
-
-    }//GEN-LAST:event_leftDoorButtonActionPerformed
+        if (!manager.gameInProgress){
+            manager.listenForMove("right",this);
+            playButton.setVisible(true);
+            hitButton.setVisible(false);
+            stayButton.setVisible(false);
+            userCardsPanel.removeAll();
+            dealerCardsPanel.removeAll();
+            ClearStatusBar();
+            backGroundPanel1.paint(backGroundPanel1.getGraphics());
+        }
+    }//GEN-LAST:event_rightDoorButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         GameManager manager = GameManager.getInstance();
-        manager.listenForMove("exit");
-        DiplayAllHands();
+        manager.listenForMove("exit",this);
         HideAllPanelsExcept(backGroundPanel1);
+        playButton.setVisible(true);
+        hitButton.setVisible(false);
+        stayButton.setVisible(false);
+        userCardsPanel.removeAll();
+        dealerCardsPanel.removeAll();
+        ClearStatusBar();
+        backGroundPanel1.paint(backGroundPanel1.getGraphics());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
@@ -378,6 +493,79 @@ public class mainForm extends javax.swing.JFrame {
             frame.dispose();
         }
     }//GEN-LAST:event_quitButtonActionPerformed
+
+    private void QuitGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitGameActionPerformed
+        // TODO add your handling code here:
+        Object[] options = {"Quit", "Nope"};
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showOptionDialog(frame, 
+                "Are you sure you want to quit",
+                "Quit Game",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+              
+        if(n == JOptionPane.YES_OPTION)
+            System.exit(0);
+        else
+        {
+            frame.setVisible(false);
+            frame.dispose();
+        }
+    }//GEN-LAST:event_QuitGameActionPerformed
+
+    private void NewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewGameActionPerformed
+        // TODO add your handling code here:
+        Object[] options = {"Start New Game", "Continue Game"};
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showOptionDialog(frame, 
+                "Are you sure you want to quit",
+                "Quitters aren't cool",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+              
+        if(n == JOptionPane.YES_OPTION)
+               HideAllPanelsExcept(startPanel1);
+        else
+        {
+            frame.setVisible(false);
+            frame.dispose();
+        }
+    }//GEN-LAST:event_NewGameActionPerformed
+
+    private void HelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpActionPerformed
+        // TODO add your handling code here:
+         
+        Object[] options = {"Go Back"};
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showOptionDialog(frame, 
+                "Theres no help in blackjack!",
+                "Go back and play.",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+              
+        if(n == JOptionPane.YES_OPTION)
+            frame.setVisible(false);
+            frame.dispose();
+    }//GEN-LAST:event_HelpActionPerformed
+
+    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        playButton.setVisible(false);
+        hitButton.setVisible(true);
+        stayButton.setVisible(true);
+        ClearStatusBar();
+        GameManager manager = GameManager.getInstance();
+        manager.playGame(this);
+        DiplayAllHands();
+    }//GEN-LAST:event_playButtonActionPerformed
 /**/
     /**
      * @param args the command line arguments
@@ -417,6 +605,9 @@ public class mainForm extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton Help;
+    private javax.swing.JToggleButton NewGame;
+    private javax.swing.JToggleButton QuitGame;
     private cpe321_project.backGroundPanel backGroundPanel1;
     private javax.swing.JPanel dealerCardsPanel;
     private javax.swing.JButton hitButton;
@@ -426,13 +617,14 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton leftDoorButton;
     private javax.swing.JLabel moneyLabel;
+    private javax.swing.JButton playButton;
     private javax.swing.JButton quitButton;
+    private javax.swing.JButton rightDoorButton;
     private javax.swing.JButton startButton;
     private cpe321_project.startPanel startPanel1;
     private cpe321_project.TransparentTextArea statusTextArea;
     private javax.swing.JButton stayButton;
     private javax.swing.JButton storeDoorButton;
-    private javax.swing.JButton storeDoorButton1;
     private javax.swing.JPanel storePanel;
     private javax.swing.JPanel userCardsPanel;
     // End of variables declaration//GEN-END:variables

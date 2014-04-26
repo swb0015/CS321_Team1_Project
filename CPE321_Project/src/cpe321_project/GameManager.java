@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class GameManager {
     
     private static GameManager instance = null;
-    private Boolean gameInProgress = false;
+    public Boolean gameInProgress = false;
     private Boolean endOfGame = false;
 
     private Room currentRoom;
@@ -69,10 +69,10 @@ public class GameManager {
          return currentFloor;
      }
      
-     public void playGame(){
+     public void playGame(mainForm m){
          gameInProgress = true;
          
-         currentGame.deal();
+         currentGame.deal(m);
          /*
          while(gameInProgress){
             String input = in.next();
@@ -89,7 +89,7 @@ public class GameManager {
          ((Room_Game)currentRoom).setGamePlayed();
      }
      
-     public void listenForMove(String input){
+     public void listenForMove(String input,mainForm m){
             //String input = in.next();
              switch (input) {
                  case "left":
@@ -97,7 +97,7 @@ public class GameManager {
                         currentRoom = currentFloor.moveLeft();
                         if(!((Room_Game)currentRoom).getGamePlayed()){
                            setCurrentGame();
-                           playGame();
+                           //playGame(m);
                         }
                      }
                      break;
@@ -106,7 +106,7 @@ public class GameManager {
                         currentRoom = currentFloor.moveRight();
                         if(!((Room_Game)currentRoom).getGamePlayed()){
                             setCurrentGame();
-                            playGame();
+                            //playGame(m);
                         }
                      }
                      break;
@@ -114,21 +114,21 @@ public class GameManager {
                      currentRoom = currentFloor.goToStore();
                      break;
                  case "hit":
-                     gameInProgress = !currentGame.hit();
+                     gameInProgress = !currentGame.hit(m);
                      break;
                  case "stay":
-                     gameInProgress = !currentGame.stay();
+                     gameInProgress = !currentGame.stay(m);
                      break;
                  case "exit":
                      currentRoom = currentFloor.exitStore();
                      break;
              }
-             if(!gameInProgress)
-             {
-
-                currentGame.deal();
-                 
-             }
+//             if(!gameInProgress)
+//             {
+//
+//                currentGame.deal(m);
+//                 
+//             }
      }
      
      public void saveGame(){
